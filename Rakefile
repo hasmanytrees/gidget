@@ -15,13 +15,19 @@ Jeweler::Tasks.new do |gem|
   gem.name = "gidget"
   gem.homepage = "http://github.com/hasmanytrees/gidget"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{The tiniest taco-loving blog engine!}
+  gem.description = %Q{Gidget is a minimalist blog engine}
   gem.email = "forrest@hasmanytrees.com"
-  gem.authors = ["hasmanytrees"]
+  gem.authors = ["Forrest Robertson"]
+  
+  gem.files = FileList['lib/**/*.rb']
+  gem.test_files = []
+     
   # Include your dependencies below. Runtime dependencies are required when using your gem,
   # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
-  #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
+  gem.add_runtime_dependency 'sinatra', '>= 1.1.0'
+  gem.add_runtime_dependency 'haml', '>= 3.0.24'
+  gem.add_runtime_dependency 'rdiscount', '>= 1.6.5'
   #  gem.add_development_dependency 'rspec', '> 1.2.3'
 end
 Jeweler::RubygemsDotOrgTasks.new
