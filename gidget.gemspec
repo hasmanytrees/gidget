@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gidget}
-  s.version = "0.0.0"
+  s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Forrest Robertson"]
-  s.date = %q{2010-11-20}
-  s.description = %q{Gidget is a minimalist blog engine}
+  s.date = %q{2010-11-21}
+  s.description = %q{Gidget is a minimalist blog engine designed to run on Heroku with a Git-based workflow.}
   s.email = %q{forrest@hasmanytrees.com}
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.7}
-  s.summary = %q{The tiniest taco-loving blog engine!}
+  s.summary = %q{The smallest taco-loving blog engine in the world!}
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
