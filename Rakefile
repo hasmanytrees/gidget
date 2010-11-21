@@ -15,8 +15,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "gidget"
   gem.homepage = "http://github.com/hasmanytrees/gidget"
   gem.license = "MIT"
-  gem.summary = %Q{The tiniest taco-loving blog engine!}
-  gem.description = %Q{Gidget is a minimalist blog engine}
+  gem.summary = %Q{The smallest taco-loving blog engine in the world!}
+  gem.description = %Q{Gidget is a minimalist blog engine designed to run on Heroku with a Git-based workflow.}
   gem.email = "forrest@hasmanytrees.com"
   gem.authors = ["Forrest Robertson"]
   
