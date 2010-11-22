@@ -47,7 +47,7 @@ module Gidget
       begin
         expires(86400, :public)
         
-        haml request.path.to_sym, :locals => { :posts => posts }
+        haml request.path.to_sym, :locals => { :posts => PostIndex.instance }
       rescue 
         pass
       end
