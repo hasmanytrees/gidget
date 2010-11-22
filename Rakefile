@@ -20,7 +20,7 @@ Jeweler::Tasks.new do |gem|
   gem.email = "forrest@hasmanytrees.com"
   gem.authors = ["Forrest Robertson"]
   
-  gem.files = FileList['lib/**/*.rb', '_stub_/**/*.*']
+  gem.files = FileList['lib/**/*', '_stub_/**/*']
   gem.executables = ['gidget']
   gem.test_files = []
      
