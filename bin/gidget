@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+require 'FileUtils'
+
+
+class App
+	def initialize(arguments, stdin)
+		@arguments = arguments
+	end
+	
+	
+	def run
+		puts "Creating web app stub for '#{@arguments[0]}'"
+		
+		source = File.expand_path(File.join(File.dirname(__FILE__), '../_stub_'))
+		destination = File.expand_path(File.join(Dir.pwd, @arguments[0]))
+		
+		FileUtils.mkdir(destination)
+		FileUtils.cp_r(source + "/.", destination)
+	end
+end
+
+
+app = App.new(ARGV, STDIN)
+app.run

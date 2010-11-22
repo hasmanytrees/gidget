@@ -1,0 +1,13 @@
+!!! 5
+%html
+	%head
+		%title hasmanytrees
+		%link{:type => "text/css", :rel => "stylesheet", :href => "/css/default.css"}
+	%body
+		%header
+			%h1 hasmanytrees<br/>> blog_
+		%article
+			%h1= posts[0][:title]
+			= markdown(posts[0][:body])
+		%footer
+			%p Copyright &copy; 2010 hasmanytrees<br/>All Rights Reserved

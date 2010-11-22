@@ -20,7 +20,8 @@ Jeweler::Tasks.new do |gem|
   gem.email = "forrest@hasmanytrees.com"
   gem.authors = ["Forrest Robertson"]
   
-  gem.files = FileList['lib/**/*.rb']
+  gem.files = FileList['lib/**/*.rb', '_stub_/**/*.*']
+  gem.executables = ['gidget']
   gem.test_files = []
      
   # Include your dependencies below. Runtime dependencies are required when using your gem,
