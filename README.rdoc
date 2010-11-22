@@ -4,13 +4,13 @@ The smallest taco-loving blog engine in the world!
 
 Gidget is a minimalist blog engine designed to run on Heroku with a Git-based workflow.  It is built upon Sinatra and uses Haml and rdiscount for templating/markup.  It was largely inspired by Toto, however Gidget was built on top of a DSL to minimize code.
 
-= Basic Structure
+== Basic Structure
 
 * Sinatra based server
 * A singleton array containing post information (the body of the a post is lazily-loaded)
 * A class to handle post information
 
-= Routing
+== Routing
 
 * / - an index template with access to the full array of posts
 * /2010 - an archive template with all access to all posts from the specified year
@@ -19,22 +19,24 @@ Gidget is a minimalist blog engine designed to run on Heroku with a Git-based wo
 * /2010/11/19/first-post - a post template with access to the individual post
 * /some-special-page - a page template with access to the full array of posts
 
-= Post Creation
+== Post Creation
 
 Posts are simply .txt files located under a folder named posts located off the root of the web app.  Text files contain two sections of data.  The first is metadata including at least a title and date as such:
 
-+title: My great post title
-date: 2010-11-19+
+<code>
+title: My great post title<br/>
+date: 2010-11-19
+</code>
 
 The second section is the body of the post and uses markdown as it's markup language.  The two sections should be separated by an empty line.
 
 File name and structure (other than the .txt extension) don't matter.  Gidget will determine request paths off of the date and title metadata and sort them accordingly.
 
-= Heroku
+== Heroku
 
 Gidget is meant to run on a Heroku.  It offers version management through Git, and uses the advantages provided by running behind a reverse-proxy cache such as Varnish.  Gidget is meant to be minimalist in design while taking these factors into consideration.
 
-= TO BE DONE
+== TO BE DONE
 
 * Create a simple generator to build out the stub of a web app using Gidget.
 * Add a paging route to allow /page/1 type usage.
