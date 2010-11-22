@@ -23,10 +23,8 @@ Gidget is a minimalist blog engine designed to run on Heroku with a Git-based wo
 
 Posts are simply .txt files located under a folder named posts located off the root of the web app.  Text files contain two sections of data.  The first is metadata including at least a title and date as such:
 
-<code>
-title: My great post title
-date: 2010-11-19
-</code>
+  title: My great post title
+  date: 2010-11-19
 
 The second section is the body of the post and uses markdown as it's markup language.  The two sections should be separated by an empty line.
 
