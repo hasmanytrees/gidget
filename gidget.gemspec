@@ -5,18 +5,27 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gidget}
-  s.version = "0.0.6"
+  s.version = "0.0.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Forrest Robertson"]
   s.date = %q{2010-11-21}
+  s.default_executable = %q{gidget}
   s.description = %q{Gidget is a minimalist blog engine designed to run on Heroku with a Git-based workflow.}
   s.email = %q{forrest@hasmanytrees.com}
+  s.executables = ["gidget"]
   s.extra_rdoc_files = [
     "LICENSE.txt",
     "README.rdoc"
   ]
   s.files = [
+    "_stub_/Gemfile",
+    "_stub_/config.ru",
+    "_stub_/posts/first-post.txt",
+    "_stub_/views/about.haml",
+    "_stub_/views/archive.haml",
+    "_stub_/views/index.haml",
+    "_stub_/views/post.haml",
     "lib/gidget.rb",
     "lib/gidget/ext.rb",
     "lib/gidget/post.rb",
