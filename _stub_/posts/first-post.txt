@@ -1,0 +1,4 @@
+title: This is the awesome title to a post
+date: 2010-11-15
+
+Hello world!
