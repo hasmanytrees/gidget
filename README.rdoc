@@ -1,8 +1,8 @@
 = gidget
 
-The smallest taco-loving blog engine in the world!
+_The smallest taco-loving blog engine in the world!_  (anyone remember 'Yo quiero Taco Bell'?)
 
-Gidget is a minimalist blog engine designed to run on Heroku with a Git-based workflow.  It is built upon Sinatra and uses Haml and rdiscount for templating/markup.  It was largely inspired by Toto, however Gidget was built on top of a DSL to minimize code.
+Gidget is a minimalist blog engine designed to run on Heroku with a Git-based workflow.  It is built upon Sinatra and uses haml and rdiscount for templating and markup.  It was largely inspired by Toto, however Gidget is built on top of a DSL to minimize and simplify the code.
 
 == Basic Structure
 
@@ -25,33 +25,46 @@ Posts are simply .txt files located under a folder named posts located off the r
 
   title: My great post title
   date: 2010-11-19
+  
+  _Hello World!_  This is my first blog post!
 
 The second section is the body of the post and uses markdown as it's markup language.  The two sections should be separated by an empty line.
 
-File name and structure (other than the .txt extension) don't matter.  Gidget will determine request paths off of the date and title metadata and sort them accordingly.
-
-== Heroku
-
-Gidget is meant to run on a Heroku.  It offers version management through Git, and uses the advantages provided by running behind a reverse-proxy cache such as Varnish.  Gidget is meant to be minimalist in design while taking these factors into consideration.
+File name and structure (other than the .txt extension) don't matter.  Gidget will determine request paths based on the date and title metadata and sort them accordingly.
 
 == Getting Started
 
-To get started using Gidget, first install the gem:
+The following comands install the Gidget gem, create a Gidget app, and then start the app:
 
   gem install gidget
-
-Once them gem is installed you can use the gidget generator to create a stub for you:
-
-  gidget blog
-
-This would create a stub in a directory named blog (it will create the directory if it doesn't already exist).  To run the site simply run rackup from the root:
-
-  cd blog
+  gidget my-gidget-app
+  cd my-gidget-app
   rackup
+
+At this point you should be able to view your blog by visiting: http://localhost:9292
+
+== Adding Source Control
+
+Before you can host yoru app on Heroku, you must be using Git for source control.  Run the following from your app directory to create a new git repository and add all your app code to it:
+
+  git init
+  git add *
+  git commit -a -m "Initial load"
+
+== Deploy To Heroku
+
+In order to deploy an app to Heroku you must have an account with them.  Once you have your account, deploying to Heroku is super easy thanks to their gem:
+
+  gem install heroku
+  heroku create
+  git push heroku master
+  heroku open
+
+Congrats!  You now have your own blog running on the internets!
 
 == TO BE DONE
 
-* Add a paging route to allow /page/1 type usage.  Need to determine best way of handling options/setting such as page_size.
+* Possibly add a paging route to allow /page/1 type usage.  Need to determine best way of handling options/setting such as page_size.
 
 == Contributing to gidget
  
