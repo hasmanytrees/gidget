@@ -1,4 +1,6 @@
 require 'sinatra/base'
+require 'haml'
+require 'rdiscount'
 require 'gidget/post_index'
 
 
@@ -7,27 +9,23 @@ module Gidget
     set :haml, :format => :html5
 
 
-    get '/' do   
-      expires(86400, :public)
-
-      haml :index, :locals => { :posts => PostIndex.instance }
+    get '/' do
+      render_view(:index, { :posts => PostIndex.instance })
     end
 
 
     get %r{^\/\d{4}\/\d{2}\/\d{2}\/\w+} do
-      post = nil
+      index = nil
   
-      PostIndex.instance.each { |p|
+      PostIndex.instance.each_with_index { |p, i|
         if (p[:request_path] == request.path)
-          post = p
+          index = i
           break
         end
       }
   
-      if (post != nil)
-        expires(86400, :public)
-
-        haml :post, :locals => { :post => post }
+      if (index != nil)
+        render_view(:post, { :posts => PostIndex.instance, :index => index })
       end
     end
 
@@ -36,21 +34,24 @@ module Gidget
       posts = PostIndex.instance.select { |p|
         p[:request_path] =~ %r{^#{request.path}}
       }
-      
-      expires(86400, :public)
   
-      haml :archive, :locals => { :posts => posts }
+      render_view(:archive, { :posts => posts })
     end
     
     
     get %r{^\/\w+} do
       begin
-        expires(86400, :public)
-        
-        haml request.path.to_sym, :locals => { :posts => PostIndex.instance }
+        render_view(request.path.to_sym, { :posts => PostIndex.instance })
       rescue 
         pass
       end
+    end
+    
+    
+    def render_view(view, locals)
+      expires(86400, :public)
+      
+      haml view, :locals => locals
     end
   end
 end

@@ -16,7 +16,7 @@ Gidget is a minimalist blog engine designed to run on Heroku with a Git-based wo
 * /2010 - an archive template with all access to all posts from the specified year
 * /2010/11 - an archive template with access to all posts from the specified year/month
 * /2010/11/19 - an archive template with access to all posts from the specified year/month/day
-* /2010/11/19/first-post - a post template with access to the individual post
+* /2010/11/19/first-post - a post template with access to the full array of posts and the current post index
 * /some-special-page - a page template with access to the full array of posts
 
 == Post Creation
@@ -44,15 +44,14 @@ Once them gem is installed you can use the gidget generator to create a stub for
 
   gidget blog
 
-This would create a stub in a directory named blog.  To run the site simply run rackup from the root:
+This would create a stub in a directory named blog (it will create the directory if it doesn't already exist).  To run the site simply run rackup from the root:
 
   cd blog
   rackup
 
 == TO BE DONE
 
-* Add a paging route to allow /page/1 type usage.
-* Update the post route to pass the array of all posts and the current post index.  This allows for previous/next links for each post to be created by the template.
+* Add a paging route to allow /page/1 type usage.  Need to determine best way of handling options/setting such as page_size.
 
 == Contributing to gidget
  

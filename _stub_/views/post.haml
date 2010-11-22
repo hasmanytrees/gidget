@@ -6,5 +6,5 @@
 		%header
 			%h1 My Blog
 		%article
-			%h1= post[:title]
-			= markdown(post[:body])
+			%h1= posts[index][:title]
+			= markdown(posts[index][:body])

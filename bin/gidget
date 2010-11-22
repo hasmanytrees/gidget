@@ -9,13 +9,24 @@ class App
 	
 	
 	def run
-		puts "Creating web app stub for '#{@arguments[0]}'"
-		
-		source = File.expand_path(File.join(File.dirname(__FILE__), '../_stub_'))
+	  source = File.expand_path(File.join(File.dirname(__FILE__), '../_stub_'))
 		destination = File.expand_path(File.join(Dir.pwd, @arguments[0]))
-		
-		FileUtils.mkdir(destination)
+	  
+		puts "Creating gidget app stub in destination '#{destination}'"
+
+    if (!File.directory? destination)
+      print "  Creating destination ... "
+      FileUtils.mkdir_p(destination)
+      puts "done."
+    else
+      puts "  Destination exists."
+    end
+
+    print  "  Copying stub ... "
 		FileUtils.cp_r(source + "/.", destination)
+		puts "done."
+		
+		puts "Done."
 	end
 end
 

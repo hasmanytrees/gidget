@@ -19,7 +19,4 @@ module Gidget
       puts "Post Index created, size = " + self.size.to_s
     end
   end
-  
-  
-  PostIndex.instance
 end
