@@ -7,7 +7,7 @@ Gidget is a minimalist blog engine designed to run on Heroku with a Git-based wo
 == Basic Structure
 
 * Sinatra based server
-* A singleton array containing post information (the body of the a post is lazily-loaded)
+* A singleton array containing post information (the body of a post is lazily-loaded)
 * A class to handle post information
 
 == Routing
