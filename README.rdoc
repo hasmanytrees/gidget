@@ -34,9 +34,23 @@ File name and structure (other than the .txt extension) don't matter.  Gidget wi
 
 Gidget is meant to run on a Heroku.  It offers version management through Git, and uses the advantages provided by running behind a reverse-proxy cache such as Varnish.  Gidget is meant to be minimalist in design while taking these factors into consideration.
 
+== Getting Started
+
+To get started using Gidget, first install the gem:
+
+  gem install gidget
+
+Once them gem is installed you can use the gidget generator to create a stub for you:
+
+  gidget blog
+
+This would create a stub in a directory named blog.  To run the site simply run rackup from the root:
+
+  cd blog
+  rackup
+
 == TO BE DONE
 
-* Create a simple generator to build out the stub of a web app using Gidget.
 * Add a paging route to allow /page/1 type usage.
 * Update the post route to pass the array of all posts and the current post index.  This allows for previous/next links for each post to be created by the template.
 
