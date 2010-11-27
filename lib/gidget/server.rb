@@ -11,28 +11,12 @@ module Gidget
     set :page_size, 5
 
     def initialize(app=nil, &block)
-      super(app, &block)
-      instance_eval(&block) if block_given?
-    end
-
-
-    def set(option, value=self, &block)
-      self.class.set(option, value, &block)
-    end
-
-
-    def enable(*opts)
-      self.class.enable(*opts)
-    end
-
-
-    def disable(*opts)
-      self.class.disable(*opts)
+      super(app, &b=nil)
+      self.class.instance_eval(&block) if block_given?
     end
 
 
     get '/' do
-      puts "Page Size: #{settings.page_size}"
       render_view(:index, { :posts => PostIndex.instance })
     end
 
