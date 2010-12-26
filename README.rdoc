@@ -1,6 +1,6 @@
 = gidget
 
-_The smallest taco-loving blog engine in the world!_  (anyone remember 'Yo quiero Taco Bell'?)
+The smallest taco-loving blog engine in the world!
 
 Gidget is a minimalist blog engine designed to run on Heroku with a Git-based workflow.  It is built upon Sinatra and uses haml and rdiscount for templating and markup.  It was largely inspired by Toto, however Gidget is built on top of a DSL to minimize and simplify the code.
 
@@ -31,6 +31,26 @@ Posts are simply .txt files located under a folder named posts located off the r
 The second section is the body of the post and uses markdown as it's markup language.  The two sections should be separated by an empty line.
 
 File name and structure (other than the .txt extension) don't matter.  Gidget will determine request paths based on the date and title metadata and sort them accordingly.
+
+== Settings
+
+Gidget allows for settings in the Sinatra style.  Setting can be set in your config.ru during creation of the Gidget server
+
+  gidget = Gidget::Server.new do
+  	set :title, "My Awesome Blog"
+  	set :author, "Your Name Goes Here"
+  	set :summary_size, 100
+  	set :page_size, 10
+  end
+
+  run gidget
+
+Settings can then be accessed from within views by using the settings object.
+
+  !!! 5
+  %html
+    %head
+      %title= settings.title
 
 == Getting Started
 
@@ -64,7 +84,7 @@ Congrats!  You now have your own blog running on the internets!
 
 == TO BE DONE
 
-* Possibly add a paging route to allow /page/1 type usage.  Need to determine best way of handling options/setting such as page_size.
+* Add a paging route to allow /page/1 type usage.
 
 == Contributing to gidget
  
