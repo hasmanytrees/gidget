@@ -1,6 +1,5 @@
 require 'sinatra/base'
 require 'haml'
-require 'rdiscount'
 require 'gidget/post_index'
 
 
@@ -25,7 +24,7 @@ module Gidget
       index = nil
   
       PostIndex.instance.each_with_index { |p, i|
-        if (p[:request_path] == request.path)
+        if (p.request_path == request.path)
           index = i
           break
         end
@@ -39,7 +38,7 @@ module Gidget
 
     get %r{^\/\d{4}(\/\d{2}(\/\d{2})?)?$} do
       posts = PostIndex.instance.select { |p|
-        p[:request_path] =~ %r{^#{request.path}}
+        p.request_path =~ %r{^#{request.path}}
       }
   
       render_view(:archive, { :posts => posts })

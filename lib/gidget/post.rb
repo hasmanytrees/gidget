@@ -1,34 +1,52 @@
 require 'yaml'
+require 'rdiscount'
 require 'gidget/ext'
 
 
 module Gidget
-  class Post < Hash
-    def initialize(file_path)  
-      file = File.open(file_path, "r")
+  class Post
+    attr_reader :file_path
+    attr_reader :request_path
+    attr_reader :meta_data
     
-      # read the first paragraph and load it into a Hash with symbols as keys
-      self.update(YAML.load(file.gets("")).inject({}) { |h, (k,v)| h.merge(k.to_sym => v) })
     
-      file.close()
+    def initialize(file_path)
+      @file_path = file_path
       
-      self[:file_path] = file_path
+      begin 
+        file = File.open(@file_path, "r")
+    
+        # read the first paragraph and load it into a Hash with symbols as keys
+        @meta_data = YAML.load(file.gets("")).inject({}) { |h, (k,v)| h.merge(k.to_sym => v) }
+      ensure
+        file.close()
+      end
       
-      self[:request_path] = self[:date].strftime("/%Y/%m/%d/") + self[:title].slugize
-      
-      self[:body] = lambda {
-        file = File.open(file_path, "r")
-      
+      @request_path = @meta_data[:date].strftime("/%Y/%m/%d/") + @meta_data[:title].slugize
+    end
+    
+    
+    def body
+      begin
+        file = File.open(@file_path, "r")
+    
         # ignore the first paragraph
         file.gets("")
-      
-        # capture the rest of the file
-        body = file.gets(nil)
-      
+    
+        # read the rest of the file and process it's markdown
+        RDiscount.new(file.gets(nil)).to_html
+      ensure
         file.close()
-      
-        return body
-      }
+      end
+    end
+    
+    
+    def method_missing(m, *args, &block)  
+      if (@meta_data.has_key?(m))
+        return @meta_data[m]
+      else
+        super
+      end
     end
   end
 end

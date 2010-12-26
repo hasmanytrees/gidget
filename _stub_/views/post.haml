@@ -1,10 +1,10 @@
 !!! 5
 %html
 	%head
-		%title My Awesome Site
+		%title= settings.title
 	%body
 		%header
 			%h1 My Blog
 		%article
-			%h1= posts[index][:title]
-			= markdown(posts[index][:body])
+			%h1= posts[index].title
+			= posts[index].body
