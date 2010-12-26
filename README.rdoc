@@ -34,7 +34,7 @@ File name and structure (other than the .txt extension) don't matter.  Gidget wi
 
 == Settings
 
-Gidget allows for settings in the Sinatra style.  Setting can be set in your config.ru during creation of the Gidget server
+Gidget allows for settings in the Sinatra style.  Settings can be set in your config.ru during creation of the Gidget server:
 
   gidget = Gidget::Server.new do
   	set :title, "My Awesome Blog"
@@ -45,7 +45,7 @@ Gidget allows for settings in the Sinatra style.  Setting can be set in your con
 
   run gidget
 
-Settings can then be accessed from within views by using the settings object.
+Settings can then be accessed from within views by using the settings object:
 
   !!! 5
   %html
