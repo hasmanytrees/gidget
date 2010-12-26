@@ -36,12 +36,30 @@ module Gidget
     end
 
 
-    get %r{^\/\d{4}(\/\d{2}(\/\d{2})?)?$} do
+    get %r{^\/(\d{4})(\/(\d{2})(\/(\d{2}))?)?$} do
+      year = params[:captures][0]
+      month = params[:captures][2]
+      day = params[:captures][4]
+      
       posts = PostIndex.instance.select { |p|
         p.request_path =~ %r{^#{request.path}}
       }
   
-      render_view(:archive, { :posts => posts })
+      render_view(:archive, { :posts => posts, :year => year, :month => month, :day => day })
+    end
+    
+    
+    get %r{^\/page\/(\d+$)} do
+      current_page = params[:captures][0].to_i
+      total_pages = (PostIndex.instance.size + settings.page_size - 1) / settings.page_size
+      
+      if (current_page <= total_pages)
+        posts = PostIndex.instance[(current_page - 1) * settings.page_size, settings.page_size]
+      
+        render_view(:page, { :posts => posts, :current_page => current_page, :total_pages => total_pages })
+      else
+        pass
+      end
     end
     
     
