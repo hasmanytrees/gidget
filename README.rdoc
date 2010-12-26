@@ -13,11 +13,10 @@ Gidget is a minimalist blog engine designed to run on Heroku with a Git-based wo
 == Routing
 
 * / - an index template with access to the full array of posts
-* /2010 - an archive template with all access to all posts from the specified year
-* /2010/11 - an archive template with access to all posts from the specified year/month
-* /2010/11/19 - an archive template with access to all posts from the specified year/month/day
+* /2010/11/19 - an archive template with access to all posts from the specified year/month/day as well as what year, month, and day it is for (month and day are optional)
 * /2010/11/19/first-post - a post template with access to the full array of posts and the current post index
-* /some-special-page - a page template with access to the full array of posts
+* /page/1 - a paging template with access to posts for the specified day as well as the current page number and total number of pages
+* /some-special-page - a custom template with access to the full array of posts
 
 == Post Creation
 
@@ -84,7 +83,7 @@ Congrats!  You now have your own blog running on the internets!
 
 == TO BE DONE
 
-* Add a paging route to allow /page/1 type usage.
+* Come up with a decent base theme
 
 == Contributing to gidget
  
