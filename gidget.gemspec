@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gidget}
-  s.version = "0.0.12"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Forrest Robertson"]
@@ -25,6 +25,7 @@ Gem::Specification.new do |s|
     "_stub_/views/about.haml",
     "_stub_/views/archive.haml",
     "_stub_/views/index.haml",
+    "_stub_/views/page.haml",
     "_stub_/views/post.haml",
     "lib/gidget.rb",
     "lib/gidget/ext.rb",
