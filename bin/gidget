@@ -3,16 +3,16 @@ require 'FileUtils'
 
 
 class App
-	def initialize(arguments, stdin)
-		@arguments = arguments
-	end
-	
-	
-	def run
-	  source = File.expand_path(File.join(File.dirname(__FILE__), '../_stub_'))
-		destination = File.expand_path(File.join(Dir.pwd, @arguments[0]))
-	  
-		puts "Creating gidget app stub in destination '#{destination}'"
+  def initialize(arguments, stdin)
+    @arguments = arguments
+  end
+  
+  
+  def run
+    source = File.expand_path(File.join(File.dirname(__FILE__), '../_stub_'))
+    destination = File.expand_path(File.join(Dir.pwd, @arguments[0]))
+    
+    puts "Creating gidget app stub in destination '#{destination}'"
 
     if (!File.directory? destination)
       print "  Creating destination ... "
@@ -23,11 +23,11 @@ class App
     end
 
     print  "  Copying stub ... "
-		FileUtils.cp_r(source + "/.", destination)
-		puts "done."
-		
-		puts "Done."
-	end
+    FileUtils.cp_r(source + "/.", destination)
+    puts "done."
+    
+    puts "Done."
+  end
 end
 
 
