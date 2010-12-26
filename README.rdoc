@@ -37,10 +37,10 @@ File name and structure (other than the .txt extension) don't matter.  Gidget wi
 Gidget uses Sinatra's built-in setting support.  Settings can be set in your config.ru during creation of the Gidget server:
 
   gidget = Gidget::Server.new do
-  	set :title, "My Awesome Blog"
-  	set :author, "Your Name Goes Here"
-  	set :summary_size, 100
-  	set :page_size, 10
+    set :title, "My Awesome Blog"
+    set :author, "Your Name Goes Here"
+    set :summary_size, 100
+    set :page_size, 10
   end
 
   run gidget
