@@ -1,7 +1,8 @@
 require 'rubygems'
-require 'bundler'
 
-Bundler.require
+# the following allows testing of the gem using our stub app
+$: << File.expand_path("../lib")
+require 'gidget'
 
 gidget = Gidget::Server.new do
   set :title, "My Awesome Blog"
