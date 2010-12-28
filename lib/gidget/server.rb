@@ -42,7 +42,7 @@ module Gidget
       day = params[:captures][4]
       
       posts = PostIndex.instance.select { |p|
-        p.request_path =~ %r{^#{request.path}}
+        p.request_path.starts_with? request.path
       }
   
       render_view(:archive, { :posts => posts, :year => year, :month => month, :day => day })
