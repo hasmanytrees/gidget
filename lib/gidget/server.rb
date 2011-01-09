@@ -9,9 +9,12 @@ module Gidget
 
     set :page_size, 5
 
+
     def initialize(app=nil, &block)
       super(app, &b=nil)
-      self.class.instance_eval(&block) if block_given?
+      Server.class_exec(&block) if block_given?
+      
+      PostIndex.instance.load
     end
 
 
@@ -20,7 +23,7 @@ module Gidget
     end
 
 
-    get %r{^\/\d{4}\/\d{2}\/\d{2}\/\w+} do
+    get %r{^\/\d{4}\/\d{2}\/\d{2}\/\w+$} do
       index = nil
   
       PostIndex.instance.each_with_index { |p, i|
@@ -63,7 +66,18 @@ module Gidget
     end
     
     
-    get %r{^\/\w+} do
+    get %r{^\/tag\/(\w+$)} do
+      posts = TagIndex.instance[params[:captures][0]]
+      
+      if (posts != nil)
+        render_view(:tag, { :posts => posts })
+      else
+        pass
+      end
+    end
+    
+    
+    get %r{^\/\w+$} do
       begin
         render_view(request.path.to_sym, { :posts => PostIndex.instance })
       rescue 
