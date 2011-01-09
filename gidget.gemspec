@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{gidget}
-  s.version = "0.1.1"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Forrest Robertson"]
-  s.date = %q{2010-12-26}
+  s.date = %q{2011-01-09}
   s.default_executable = %q{gidget}
   s.description = %q{Gidget is a minimalist blog engine designed to run on Heroku with a Git-based workflow.}
   s.email = %q{forrest@hasmanytrees.com}
@@ -20,6 +20,7 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     "_stub_/Gemfile",
+    "_stub_/config.dev.ru",
     "_stub_/config.ru",
     "_stub_/posts/first-post.txt",
     "_stub_/views/about.haml",
@@ -27,11 +28,13 @@ Gem::Specification.new do |s|
     "_stub_/views/index.haml",
     "_stub_/views/page.haml",
     "_stub_/views/post.haml",
+    "_stub_/views/tag.haml",
     "lib/gidget.rb",
     "lib/gidget/ext.rb",
     "lib/gidget/post.rb",
     "lib/gidget/post_index.rb",
-    "lib/gidget/server.rb"
+    "lib/gidget/server.rb",
+    "lib/gidget/tag_index.rb"
   ]
   s.homepage = %q{http://github.com/hasmanytrees/gidget}
   s.licenses = ["MIT"]
