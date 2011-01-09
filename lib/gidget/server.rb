@@ -23,7 +23,7 @@ module Gidget
     end
 
 
-    get %r{^\/\d{4}\/\d{2}\/\d{2}\/\w+$} do
+    get %r{^\/\d{4}\/\d{2}\/\d{2}\/[\w,-]+$} do
       index = nil
   
       PostIndex.instance.each_with_index { |p, i|
@@ -66,7 +66,7 @@ module Gidget
     end
     
     
-    get %r{^\/tag\/(\w+$)} do
+    get %r{^\/tag\/([\w,-]+$)} do
       posts = TagIndex.instance[params[:captures][0]]
       
       if (posts != nil)
@@ -77,7 +77,7 @@ module Gidget
     end
     
     
-    get %r{^\/\w+$} do
+    get %r{^\/[\w,-]+$} do
       begin
         render_view(request.path.to_sym, { :posts => PostIndex.instance })
       rescue 
