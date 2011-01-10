@@ -9,8 +9,6 @@ module Gidget
     
     def load posts
       posts.each { |post|
-        tags = nil
-        
         if (post.meta_data.has_key? :tags)
           tags = post.meta_data[:tags].split(',')
           
