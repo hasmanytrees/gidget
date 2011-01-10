@@ -54,7 +54,7 @@ module Gidget
     end
     
     
-    // route for paging
+    # route for paging
     get %r{^\/page\/(\d+$)} do
       current_page = params[:captures][0].to_i
       total_pages = (PostIndex.instance.size + settings.page_size - 1) / settings.page_size
@@ -69,7 +69,7 @@ module Gidget
     end
     
     
-    // route for list of posts tagged with a particular tag
+    # route for list of posts tagged with a particular tag
     get %r{^\/tag\/([\w,-]+$)} do
       posts = TagIndex.instance[params[:captures][0]]
       
@@ -81,7 +81,7 @@ module Gidget
     end
     
     
-    // route to try and match the request path to an existing view template
+    # route to try and match the request path to an existing view template
     get %r{^\/[\w,-]+$} do
       begin
         render_view(request.path.to_sym, { :posts => PostIndex.instance })
