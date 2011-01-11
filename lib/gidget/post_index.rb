@@ -17,7 +17,7 @@ module Gidget
       }
     
       # sort the array by date descending (newest will be first)
-      self.replace self.sort_by { |p| p.meta_data[:date].to_i }.reverse!
+      self.replace self.sort_by { |p| Time.parse(p.meta_data[:date].to_s).to_i }.reverse!
 
       puts "Post Index created, size = " + self.size.to_s
       
