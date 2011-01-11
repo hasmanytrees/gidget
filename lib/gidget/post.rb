@@ -6,7 +6,6 @@ require 'gidget/ext'
 module Gidget
   class Post
     attr_reader :file_path
-    attr_reader :request_path
     attr_reader :meta_data
     
     
@@ -21,8 +20,11 @@ module Gidget
       ensure
         file.close()
       end
-      
-      @request_path = @meta_data[:date].strftime("/%Y/%m/%d/") + @meta_data[:title].slugize
+    end
+
+
+    def request_path
+      @meta_data[:permalink] || @meta_data[:date].strftime("/%Y/%m/%d/") + @meta_data[:title].slugize
     end
     
     
@@ -41,12 +43,8 @@ module Gidget
     end
     
     
-    def method_missing(m, *args, &block)  
-      if (@meta_data.has_key?(m))
-        return @meta_data[m]
-      else
-        super
-      end
+    def method_missing(m, *args, &block)
+      @meta_data[m] || super
     end
   end
 end
