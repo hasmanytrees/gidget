@@ -16,8 +16,8 @@ module Gidget
         self << Post.new(file_path)
       }
     
-      # sort the array by the request path, descending (newest by date will be first)
-      self.replace self.sort_by { |p| p.request_path }.reverse!
+      # sort the array by date descending (newest will be first)
+      self.replace self.sort_by { |p| p.meta_data[:date].to_i }.reverse!
 
       puts "Post Index created, size = " + self.size.to_s
       
