@@ -70,6 +70,7 @@ Congrats!  You now have your own blog running on the world wide web!
 
 == TO BE DONE
 
+* Cleanup stub contents
 * Come up with a decent base theme
 
 == Contributing to gidget
