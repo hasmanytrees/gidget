@@ -24,6 +24,7 @@ class App
 
     print  "  Copying stub ... "
     FileUtils.cp_r(source + "/.", destination)
+    FileUtils.remove_file(File.join(destination, "config.dev.ru"))
     puts "done."
     
     puts "Done."

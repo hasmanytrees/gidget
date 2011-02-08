@@ -1,4 +1,5 @@
 require 'rdiscount'
+require 'yaml'
 require 'gidget/ext'
 
 

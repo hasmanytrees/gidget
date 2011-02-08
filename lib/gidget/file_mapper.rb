@@ -1,5 +1,4 @@
 require 'singleton'
-require 'yaml'
 require 'gidget/page'
 require 'gidget/post'
 
@@ -41,7 +40,7 @@ module Gidget
       }
       
       # sort the post index by date descending (newest will be first)
-      @posts.replace @posts.sort_by { |p| Time.parse(p.meta_data[:date].to_s).to_i }.reverse!
+      @posts.replace @posts.sort_by { |p| Time.parse(p.date.to_s).to_i }.reverse!
       
       puts "Post Index created, size = " + @posts.size.to_s
       
