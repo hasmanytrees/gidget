@@ -1,6 +1,7 @@
 require 'sinatra/base'
+require 'benchmark'
 require 'haml'
-require 'gidget/post_index'
+require 'gidget/file_mapper'
 
 
 module Gidget
@@ -14,87 +15,97 @@ module Gidget
       super(app, &b=nil)
       Server.class_exec(&block) if block_given?
       
-      PostIndex.instance.load
+      # load the file mapper
+      puts Benchmark.measure { FileMapper.instance.load }
     end
 
 
+    # route for root
     get '/' do
-      render_view(:index, { :posts => PostIndex.instance })
+      haml :index, :locals => { :posts => FileMapper.instance.posts }
+    end
+
+
+    # route for a specific page
+    get %r{^\/[\w,\-,\/]+$} do
+      page = FileMapper.instance.pages[request.path]
+
+      if (page != nil)
+        haml :page, :locals => { :page => page }
+      else
+        pass
+      end
     end
 
 
     # route for a specific post
-    get %r{^\/\d{4}\/\d{2}\/\d{2}\/[\w,-]+$} do
+    get %r{^\/[\w,\-,\/]+$} do
       index = nil
-  
-      PostIndex.instance.each_with_index { |p, i|
+
+      FileMapper.instance.posts.each_with_index { |p, i|
         if (p.request_path == request.path)
           index = i
           break
         end
       }
-  
+
       if (index != nil)
-        render_view(:post, { :posts => PostIndex.instance, :index => index })
+        haml :post, :locals => { :posts => FileMapper.instance.posts, :index => index }
+      else
+        pass
       end
     end
-
-
-    # route for an archive listing in the format /yyyy/mm/dd (month and day are optional)
-    get %r{^\/(\d{4})(\/(\d{2})(\/(\d{2}))?)?$} do
-      year = params[:captures][0]
-      month = params[:captures][2]
-      day = params[:captures][4]
-      
-      posts = PostIndex.instance.select { |p|
-        p.request_path.starts_with? request.path
-      }
+    
+    
+    # route for an archive listing in the format archive/yyyy/mm (year and month are optional)
+    get %r{^\/archive(\/(\d{4})(\/(\d{2}))?)?$} do
+      if (params[:captures] == nil)
+        posts = FileMapper.instance.posts
+      else
+        year = params[:captures][1]
+        month = params[:captures][3]
+        
+        prefix = "#{year}#{month}"
+        
+        posts = FileMapper.instance.posts.select { |p|
+          p.date.strftime("%Y%m").starts_with? prefix
+        }
+      end
   
-      render_view(:archive, { :posts => posts, :year => year, :month => month, :day => day })
+      haml :archive, :locals => { :posts => posts, :year => year, :month => month }
     end
-    
-    
-    # route for paging
-    get %r{^\/page\/(\d+$)} do
+
+
+    # route for post paging
+    get %r{^\/page\/(\d+)$} do
       current_page = params[:captures][0].to_i
-      total_pages = (PostIndex.instance.size + settings.page_size - 1) / settings.page_size
-      
+      total_pages = (FileMapper.instance.posts.size + settings.page_size - 1) / settings.page_size
+
       if (current_page <= total_pages)
-        posts = PostIndex.instance[(current_page - 1) * settings.page_size, settings.page_size]
-      
-        render_view(:page, { :posts => posts, :current_page => current_page, :total_pages => total_pages })
+        posts = FileMapper.instance.posts[(current_page - 1) * settings.page_size, settings.page_size]
+
+        haml :post_paging, :locals => { :posts => posts, :current_page => current_page, :total_pages => total_pages }
       else
         pass
       end
     end
-    
-    
+
+
     # route for list of posts tagged with a particular tag
-    get %r{^\/tag\/([\w,-]+$)} do
-      posts = TagIndex.instance[params[:captures][0]]
-      
+    get %r{^\/tag\/([\w,\-]+)$} do
+      posts = FileMapper.instance.tags[params[:captures][0]]
+
       if (posts != nil)
-        render_view(:tag, { :posts => posts })
+        haml :tag, :locals => { :posts => posts }
       else
         pass
       end
     end
     
     
-    # route to try and match the request path to an existing view template
-    get %r{^\/[\w,-]+$} do
-      begin
-        render_view(request.path.to_sym, { :posts => PostIndex.instance })
-      rescue 
-        pass
-      end
-    end
-    
-    
-    def render_view(view, locals)
+    # make all requests cached for a day
+    after do
       expires(86400, :public)
-      
-      haml view, :locals => locals
     end
   end
 end
