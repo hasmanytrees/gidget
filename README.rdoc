@@ -7,29 +7,17 @@ Gidget is a minimalist blog engine designed to run on Heroku with a Git-based wo
 == Basic Structure
 
 * Sinatra based server
-* A singleton array containing post information (the body of a post is lazily-loaded)
+* A File Mapper to help map requests to pages, posts, and tags
+* A class to handle page information
 * A class to handle post information
 
-== Routing
+== Templates
 
-* / - an index template with access to the full array of posts
-* /2010/11/19 - an archive template with access to all posts from the specified year/month/day as well as what year, month, and day it is for (month and day are optional)
-* /2010/11/19/first-post - a post template with access to the full array of posts and the current post index
-* /page/1 - a paging template with access to posts for the specified day as well as the current page number and total number of pages
-* /some-special-page - a custom template with access to the full array of posts
+<This section is being rewritten>
 
-== Post Creation
+== Page/Post Creation
 
-Posts are simply .txt files located under a folder named posts located off the root of the web app.  Text files contain two sections of data.  The first is metadata including at least a title and date as such:
-
-  title: My great post title
-  date: 2010-11-19
-  
-  _Hello World!_  This is my first blog post!
-
-The second section is the body of the post and uses markdown as it's markup language.  The two sections should be separated by an empty line.
-
-File name and structure (other than the .txt extension) don't matter.  Gidget will determine request paths based on the date and title metadata and sort them accordingly.
+<This section is being rewritten>
 
 == Settings
 
@@ -38,7 +26,6 @@ Gidget uses Sinatra's built-in setting support.  Settings can be set in your con
   gidget = Gidget::Server.new do
     set :title, "My Awesome Blog"
     set :author, "Your Name Goes Here"
-    set :summary_size, 100
     set :page_size, 10
   end
 
@@ -79,7 +66,7 @@ In order to deploy an app to Heroku you must have an account with them.  Once yo
   git push heroku master
   heroku open
 
-Congrats!  You now have your own blog running on the internets!
+Congrats!  You now have your own blog running on the world wide web!
 
 == TO BE DONE
 

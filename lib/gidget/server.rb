@@ -57,7 +57,7 @@ module Gidget
     end
     
     
-    # route for an archive listing in the format archive/yyyy/mm (year and month are optional)
+    # route for an archive listing in the format /archive/yyyy/mm (year and month are optional)
     get %r{^\/archive(\/(\d{4})(\/(\d{2}))?)?$} do
       if (params[:captures] == nil)
         posts = FileMapper.instance.posts

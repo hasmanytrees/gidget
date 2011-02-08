@@ -23,6 +23,16 @@ module Gidget
     end
 
 
+    def request_path
+      @meta_data[:permalink] || "/" + self.title.slugize
+    end
+
+
+    def title
+      @meta_data[:title]
+    end
+
+
     def body
       begin
         file = File.open(@file_path, "r")
@@ -40,16 +50,6 @@ module Gidget
 
     def method_missing(m, *args, &block)
       @meta_data[m] || super
-    end
-
-
-    def request_path
-      @meta_data[:permalink] || "/" + self.title.slugize
-    end
-    
-    
-    def title
-      @meta_data[:title]
     end
   end
 end
