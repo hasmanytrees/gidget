@@ -55,7 +55,7 @@ module Gidget
     end
     
     
-    #route for a custom view
+    # route for a custom view
     get %r{^\/[\w,\-,\/]+$} do
       begin
         haml request.path.to_sym, :locals => { :posts => FileMapper.instance.posts }
