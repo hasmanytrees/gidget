@@ -9,13 +9,11 @@ module Gidget
     
     attr_reader :pages
     attr_reader :posts
-    attr_reader :tags
   
   
     def initialize
       @pages = Hash.new
       @posts = Array.new
-      @tags = Hash.new
     end
     
     
