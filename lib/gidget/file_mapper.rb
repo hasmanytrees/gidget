@@ -20,7 +20,7 @@ module Gidget
 
 
     def posts
-      if (date_last_loaded.day != DateTime.now.day) posts_load
+      if (date_last_loaded.day != DateTime.now.day) load_posts
       @posts
     end
 
