@@ -20,7 +20,10 @@ module Gidget
 
 
     def posts
-      if (date_last_loaded.day != DateTime.now.day) load_posts
+      if (@date_last_loaded.day != DateTime.now.day)
+        load_posts
+      end
+
       @posts
     end
 
@@ -45,16 +48,19 @@ module Gidget
     end
 
 
-   def load_posts
-      posts.clear
-      date_last_loaded = DateTime.now
+    def load_posts
+      @posts.clear
+      @date_last_loaded = DateTime.now
 
       post_paths = Dir.glob("posts/**/*.txt")
 
       # load the post index
       post_paths.each { |file_path|
         post = Post.new(file_path)
-        @posts << post
+	
+        if (post.date < @date_last_loaded)
+          @posts << post
+        end
       }
       
       # sort the post index by date descending (newest will be first)
