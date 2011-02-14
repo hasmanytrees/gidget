@@ -43,26 +43,6 @@ module Gidget
       @posts.replace @posts.sort_by { |p| Time.parse(p.date.to_s).to_i }.reverse!
       
       puts "Post Index created, size = " + @posts.size.to_s
-      
-      
-      # load the tag index
-      @posts.each { |post|
-        if (post.meta_data.has_key? :tags)
-          tags = post.meta_data[:tags].split(',')
-          
-          tags.each { |tag|
-            tag.strip!
-            
-            if (!@tags.has_key? tag)
-              @tags[tag] = []
-            end
-            
-            @tags[tag] << post
-          }
-        end
-      }
-      
-      puts "Tag Index created, size = " + @tags.keys.size.to_s
     end
   end
 end
