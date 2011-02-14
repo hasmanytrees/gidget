@@ -57,47 +57,11 @@ module Gidget
     end
     
     
-    # route for an archive listing in the format /archive/yyyy/mm (year and month are optional)
-    get %r{^\/archive(\/(\d{4})(\/(\d{2}))?)?$} do
-      if (params[:captures] == nil)
-        posts = FileMapper.instance.posts
-      else
-        year = params[:captures][1]
-        month = params[:captures][3]
-        
-        prefix = "#{year}#{month}"
-        
-        posts = FileMapper.instance.posts.select { |p|
-          p.date.strftime("%Y%m").starts_with? prefix
-        }
-      end
-  
-      haml :archive, :locals => { :posts => posts, :year => year, :month => month }
-    end
-
-
-    # route for post paging
-    get %r{^\/page\/(\d+)$} do
-      current_page = params[:captures][0].to_i
-      total_pages = (FileMapper.instance.posts.size + settings.page_size - 1) / settings.page_size
-
-      if (current_page <= total_pages)
-        posts = FileMapper.instance.posts[(current_page - 1) * settings.page_size, settings.page_size]
-
-        haml :post_paging, :locals => { :posts => posts, :current_page => current_page, :total_pages => total_pages }
-      else
-        pass
-      end
-    end
-
-
-    # route for list of posts tagged with a particular tag
-    get %r{^\/tag\/([\w,\-]+)$} do
-      posts = FileMapper.instance.tags[params[:captures][0]]
-
-      if (posts != nil)
-        haml :tag, :locals => { :posts => posts }
-      else
+    #route for a custom view
+    get %r{^\/[\w,\-,\/]+$} do
+      begin
+        haml request.path.to_sym, :locals => { :posts => FileMapper.instance.posts }
+      rescue
         pass
       end
     end
