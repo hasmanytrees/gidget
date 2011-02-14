@@ -6,9 +6,6 @@ require 'gidget/post'
 module Gidget
   class FileMapper
     include Singleton
-    
-    attr_reader :pages
-    attr_reader :posts
   
   
     def initialize
@@ -17,7 +14,25 @@ module Gidget
     end
     
     
+    def pages
+      @pages
+    end
+
+
+    def posts
+      if (date_last_loaded.day != DateTime.now.day) posts_load
+      @posts
+    end
+
+    
     def load
+      load_pages
+      load_posts
+    end
+
+
+    private
+    def load_pages
       page_paths = Dir.glob("pages/**/*.txt")
 
       # load the page index
@@ -27,8 +42,13 @@ module Gidget
       }
       
       puts "Page Index created, size = " + @pages.keys.size.to_s
-      
-      
+    end
+
+
+   def load_posts
+      posts.clear
+      date_last_loaded = DateTime.now
+
       post_paths = Dir.glob("posts/**/*.txt")
 
       # load the post index
