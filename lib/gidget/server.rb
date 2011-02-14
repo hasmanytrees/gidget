@@ -8,8 +8,6 @@ module Gidget
   class Server < Sinatra::Base
     set :haml, :format => :html5
 
-    set :page_size, 5
-
 
     def initialize(app=nil, &block)
       super(app, &b=nil)
