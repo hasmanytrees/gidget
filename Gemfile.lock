@@ -3,10 +3,13 @@ GEM
   specs:
     git (1.2.5)
     haml (3.0.24)
+    html_truncator (0.2.0)
+      nokogiri (~> 1.4)
     jeweler (1.5.1)
       bundler (~> 1.0.0)
       git (>= 1.2.5)
       rake
+    nokogiri (1.4.4)
     rack (1.2.1)
     rake (0.8.7)
     rcov (0.9.9)
@@ -24,6 +27,7 @@ PLATFORMS
 DEPENDENCIES
   bundler (~> 1.0.0)
   haml (>= 3.0.24)
+  html_truncator (>= 0.2.0)
   jeweler (~> 1.5.1)
   rcov
   rdiscount (>= 1.6.5)
