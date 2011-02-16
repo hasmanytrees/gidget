@@ -40,7 +40,7 @@ module Gidget
         # ignore the first paragraph
         file.gets("")
 
-        # read the rest of the file and process it's markdown
+        # read the rest of the file and process markdown
         RDiscount.new(file.gets(nil)).to_html
       ensure
         file.close()

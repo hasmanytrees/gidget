@@ -1,5 +1,6 @@
 title: This is the awesome title to a post
 date: 2010-11-15
-tags: tag1, tag2
 
 _Hello world!_  I am Gidget-powered!
+
+This is some more text after the summary

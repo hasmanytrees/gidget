@@ -1,11 +1,18 @@
 !!! 5
-%html
+%html{:lang => "en"}
   %head
-    %title= settings.title
+    %meta{:charset => "utf-8"}
+    %title hasmanytrees.com
+    %link{:rel => "stylesheet", :href => "http://fonts.googleapis.com/css?family=Droid+Serif:regular,italic,bold"}
+    %style{:type => "text/css"}
+      body {
+      font-family: 'Droid Serif', Georgia, sans-serif;
+      font-size: 14px;
+      text-align: center;
+      margin: 150px 0 0 0;
+      padding: 0;
+      background-color: white;
+      color: #222;
+      }
   %body
-    %header
-      %h1 My Blog
-    %article
-      %h1= posts[0].title
-      = posts[0].body
-      = DateTime.now.to_s
+    You can't see the forest for the trees.

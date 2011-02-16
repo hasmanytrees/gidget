@@ -1,5 +1,7 @@
 require 'rubygems'
 
+use Rack::Static, :urls => ["/css", "/images"], :root => "public"
+
 # the following allows testing of the gem using our stub app
 $: << File.expand_path("../lib")
 require 'gidget'
