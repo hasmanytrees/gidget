@@ -16,7 +16,7 @@ module Gidget
       
       puts Benchmark.measure { self.load }
     end
-    
+
     
     def load
       page_paths = Dir.glob("pages/**/*.txt")
