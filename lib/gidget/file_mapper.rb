@@ -8,11 +8,13 @@ module Gidget
     
     attr_reader :pages
     attr_reader :posts
+    attr_reader :post_indexes
   
   
     def initialize
       @pages = Hash.new
       @posts = Array.new
+      @post_indexes = Hash.new
       
       puts Benchmark.measure {
         page_paths = Dir.glob("pages/**/*.txt")
@@ -37,27 +39,13 @@ module Gidget
         # sort the post index by date descending (newest will be first)
         @posts.replace @posts.sort_by { |p| Time.parse(p.date.to_s).to_i }.reverse!
 
+        # load the post index hash
+        @posts.each_with_index { |p, i|
+          @post_indexes[p.request_path] = i
+        }
+
         puts "Post Index created, size = " + @posts.size.to_s
       }
-    end
-    
-    
-    def get_page_for_request(request_path)
-      self.pages[request_path]
-    end
-    
-    
-    def get_post_index_for_request(request_path)
-      index = nil
-
-      self.posts.each_with_index { |p, i|
-        if (p.request_path == request_path)
-          index = i
-          break
-        end
-      }
-      
-      index
     end
   end
 end

@@ -22,9 +22,19 @@ module Gidget
     end
 
 
+    # route for a custom view
+    get %r{^\/[\w,\-,\/]+$} do
+      begin
+        haml request.path.to_sym, :locals => { :posts => @file_mapper.posts }
+      rescue
+        pass
+      end
+    end
+
+
     # route for a specific page
     get %r{^\/[\w,\-,\/]+$} do
-      page = @file_mapper.get_page_for_request(request.path)
+      page = @file_mapper.pages[request.path]
 
       if (page != nil)
         haml :page, :locals => { :page => page }
@@ -36,21 +46,11 @@ module Gidget
 
     # route for a specific post
     get %r{^\/[\w,\-,\/]+$} do
-      index = @file_mapper.get_post_index_for_request(request.path)
+      index = @file_mapper.post_indexes[request.path]
 
       if (index != nil)
         haml :post, :locals => { :posts => @file_mapper.posts, :index => index }
       else
-        pass
-      end
-    end
-    
-    
-    # route for a custom view
-    get %r{^\/[\w,\-,\/]+$} do
-      begin
-        haml request.path.to_sym, :locals => { :posts => @file_mapper.posts }
-      rescue
         pass
       end
     end
